@@ -7,11 +7,11 @@ let movieHistory = document.getElementById("movie-history");
 
 //Below code executes on window open
 window.onload = function(){
-    keys = Object.keys(localStorage)
+    keys = Object.keys(localStorage);
     for(var i = 0; i < keys.length; i++){
-        movieList[keys[i]] = localStorage[keys[i]]
-        appendLi(myMovieList, keys[i])
-        newMovie(keys[i])
+        movieList[keys[i]] = localStorage[keys[i]];
+        appendLi(myMovieList, keys[i]);
+        newMovie(keys[i]);
     }
 
 }
@@ -19,6 +19,7 @@ window.onload = function(){
 // Example of a simple function that clears the input after a user types something in
 function clearInput() {
     inp.value = "";
+    localStorage.clear();
 }
 
 function clearMovies() {
@@ -40,7 +41,7 @@ function addMovie() {
     // Step 3: Parse the input
     words = userTypedText.split(" ");
     if(words.length > 1){
-        movieName = ''
+        movieName = '';
         words.foreach((word) => {
             movieName += word.charAt(0).toUpperCase() + word.slice(1);
         })
@@ -51,15 +52,15 @@ function addMovie() {
 
     // Step 4: Check if the movie has been seen already if not, add it to the object 'movieList'
     if(Object.keys(movieList).includes(movieName)){
-        movieList[movieName] += 1
+        movieList[movieName] += 1;
         clearInput();
         incrementMovie(movieName);
-        return null
+        return null;
     }
-    movieList[movieName] = 1
+    movieList[movieName] = 1;
 
     //steps 5-8 handled in this function
-    appendLi(myMovieList, movieName)
+    appendLi(myMovieList, movieName);
 
     // Step 9: Call the clearInput function to clear the input field
     clearInput();
@@ -138,7 +139,7 @@ window.onbeforeunload = function(){
         //checks to see if they are already in local storage and if they are, verifies that the watch count is the correct value.
         //if either are false, it writes the current pair to local storage
         if((!(keys[i] in Object.keys(localStorage))) || (movieList[keys[i]]) != localStorage.getItem(keys[i])) {
-            localStorage.setItem(keys[i], movieList[keys[i]])
+            localStorage.setItem(keys[i], movieList[keys[i]]);
         }
     }
 }
